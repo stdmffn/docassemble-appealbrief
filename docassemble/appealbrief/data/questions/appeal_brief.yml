@@ -1,0 +1,67 @@
+---
+include:
+  - basic-questions.yml
+---
+metadata:
+  title: Appeal Brief
+  short title: Appeal Brief
+---
+question: |
+  Caption?
+fields:
+  - no label: Case
+    input type: area
+---
+question: |
+  County?
+fields:
+  - no label: County
+---
+question: |
+  Court
+subquestion: |
+  Appeals or Supreme
+fields:
+  - no label: Court
+---
+question: |
+  Judicial district
+subquestion: |
+  Type the name of the number - Fourteenth
+fields:
+  - 'judicial': JUD
+---
+question: |
+  Represented party?
+subquestion: |
+  Appellant/Appellee
+fields:
+  - 'part_short': Party
+---
+question: |
+  Long Party
+fields:
+  - no label: Party_Long
+---
+code: |
+  Party_name = Party_Long
+---
+mandatory: True
+question: |
+  Your document is ready.
+subquestion: |
+  Thank you for using this interview.
+buttons:
+  - Exit: exit
+  - Restart: restart
+attachments:
+  - name: Brief
+    filename: Brief
+    docx template file: Appellees_Brief.docx
+---
+question: |
+  appeal number
+fields:
+  - no label: app_no
+  - no label: brief_description
+  - no label: cv_no

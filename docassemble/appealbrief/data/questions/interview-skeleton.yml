@@ -1,0 +1,182 @@
+---
+objects: 
+  - issue: DAList.using(object_type=DAObject, there_are_any=True, complete_attribute='complete')
+  - issue[i].header: DAList.using(object_type=DAObject, complete_attribute='complete')
+  - issue[i].header[j].sub: DAList.using(object_type=DAObject, complete_attribute='complete')
+---
+code: |
+  issue[i].name
+  issue[i].header.gather()
+  issue[i].complete = True
+---
+code: |
+  issue[i].header[j].name
+  issue[i].header[j].intro
+  issue[i].header[j].law
+  issue[i].header[j].farg
+  issue[i].header[j].larg
+  issue[i].header[j].parg
+  issue[i].header[j].concl
+  issue[i].header[j].sub.gather()
+  issue[i].header[j].complete = True
+---
+code: |
+  
+  issue[i].header[j].sub[k].name
+  issue[i].header[j].sub[k].intro
+  issue[i].header[j].sub[k].law
+  issue[i].header[j].sub[k].farg
+  issue[i].header[j].sub[k].larg
+  issue[i].header[j].sub[k].parg
+  issue[i].header[j].sub[k].concl  
+  issue[i].header[j].sub[k].complete = True
+---
+metadata:
+  title: |
+    Brief outline 
+  short title: |
+    Brief
+  description: |
+    This interview helps you draft a brief.
+  authors:
+    - name: Samuel Pinero
+      organization: Oak City Law LLP
+
+  revision_date: 2022-10-19
+---
+mandatory: true
+question: |
+  Your documents are ready. Please print and file!
+subquestion: |
+  Hello, Download. 
+  % for p in issue:
+    % for q in p.header:
+      % if len(q.name) > 0:
+  # ${p.name}
+  ## ${q.name}
+        % for r in q.sub:
+          % if len (r.name) > 0:
+  * ${r.name}
+          % endif
+        % endfor
+      % endif
+    % endfor
+  % endfor
+#attachment:
+#  - name: Motion To Dismiss
+#    filename: Motion to Dismiss
+ #   docx template file: Appeal Brief v2.docx
+---
+code: |
+  answer = 2 + 2
+---
+question: |
+  Tenant Information
+fields:
+  - name of Tenant? : client.name.first
+  - Tenant Address? : client.address.address
+  - Tenant Phone? : client.phone
+---
+question: |
+  case information
+fields:
+  - County? : case.county
+  - Landlord? : case.plaintiff
+  - Docket number? : case.docket
+  - yes? : my_yesno_variable
+    datatype: yesno
+---
+question: |
+  ${capitalize(ordinal(i))} Issue presented? 
+fields:
+  - nolabel: issue[i].name
+    input type: area
+
+---
+
+question: |
+    ${ issue[i] } ??
+fields:
+  - Header: issue[i].header[j].name
+    input type: area
+    required: TRUE
+  - Introduction: issue[i].header[j].intro
+    input type: area
+    required: False
+  - Law: issue[i].header[j].law
+    input type: area
+    required: False
+  - Factual Argument: issue[i].header[j].farg
+    input type: area
+    required: False
+  - Legal Argument: issue[i].header[j].larg
+    input type: area
+    required: False
+  - Policy Argument: issue[i].header[j].parg
+    input type: area
+    required: False
+  - Conclusion: issue[i].header[j].concl
+    input type: area
+    required: False
+
+---
+
+question: |
+    ${ [j] } ??
+fields:
+  - Header: issue[i].header[j].sub[k].name
+    input type: area
+    required: TRUE
+  - Introduction: issue[i].header[j].sub[k].intro
+    input type: area
+    required: False
+  - Law: issue[i].header[j].sub[k].law
+    input type: area
+    required: False
+  - Factual Argument: issue[i].header[j].sub[k].farg
+    input type: area
+    required: False
+  - Legal Argument: issue[i].header[j].sub[k].larg
+    input type: area
+    required: False
+  - Policy Argument: issue[i].header[j].sub[k].parg
+    input type: area
+    required: False
+  - Conclusion: issue[i].header[j].sub[k].concl
+    input type: area
+    required: False
+
+---
+question: |
+  Is there another issue presented? 
+yesno: issue.there_is_another
+---
+question: |
+  Are there issues presented?
+yesno: issue.there_are_any
+---
+question: |
+  Does ${ issue[i] } have any header?
+yesno: issue[i].header.there_are_any
+---
+question: |
+  Is there another header presented? 
+yesno: issue[i].header.there_is_another
+---
+question: |
+  Does ${ [j] } have any subheader?
+yesno: issue[i].header[j].sub.there_are_any
+---
+question: |
+  Is there another subheader for ${ issue[i].header[j] } presented? 
+yesno: issue[i].header[j].sub.there_is_another
+---
+
+
+question: |
+  Statement of the facts:
+fields:
+  - no label: facts
+    input type: area
+    required: False
+    

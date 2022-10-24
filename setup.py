@@ -46,7 +46,7 @@ def find_package_data(where='.', package='', exclude=standard_exclude, exclude_d
 setup(name='docassemble.appealbrief',
       version='1.0',
       description=('Appeal Brief'),
-      long_description='# docassemble.appealbrief\n\nAppeal Brief\n\n## Author\n\nSystem Administrator, sam.pinero@oakcitylaw.com\n\n',
+      long_description='# docassemble.appealbrief\r\n\r\nAppeal Brief\r\n\r\n## Author\r\n\r\nSystem Administrator, sam.pinero@oakcitylaw.com\r\n\r\n',
       long_description_content_type='text/markdown',
       author='System Administrator',
       author_email='sam.pinero@oakcitylaw.com',
